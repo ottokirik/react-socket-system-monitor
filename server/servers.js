@@ -28,9 +28,8 @@ if (cluster.isMaster) {
   //   spawn(i);
   // }
 
-  Array.from({ length: numProcesses }).forEach((i) => {
-    console.log(i);
-    spawn(i);
+  Array.from({ length: numProcesses }).forEach((_, index) => {
+    spawn(index);
   });
 
   // Helper function for getting a worker index based on IP address.
@@ -79,8 +78,6 @@ if (cluster.isMaster) {
   io.on('connection', (socket) => {
     socketMain(io, socket);
   });
-
-  socketMain(io, null);
 
   // Listen to messages sent from the master. Ignore everything else.
   process.on('message', (message, connection) => {
