@@ -16,13 +16,22 @@ socket.on('connect', () => {
     }
   }
 
-  socket.emit('clientAuth', 'jklg;fdsajfgaisd');
+  performanceData().then((data) => {
+    data.macA = macA;
+    socket.emit('initPerfData', data);
+  });
+
+  socket.emit('clientAuth', 'fdsajfgaisd');
 
   const perfDataInterval = setInterval(() => {
     performanceData().then((data) => {
       socket.emit('perfData', data);
     });
   }, 1000);
+
+  socket.on('disconnect', () => {
+    clearInterval(perfDataInterval);
+  });
 });
 
 const performanceData = async () => {
