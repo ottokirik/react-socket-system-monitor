@@ -1,4 +1,29 @@
 const os = require('os');
+const io = require('socket.io-client');
+const socket = io('http://127.0.0.1:8181');
+
+socket.on('connect', () => {
+  // We need to identify our machine
+  const nI = os.networkInterfaces();
+
+  let macA = '';
+
+  for (let key in nI) {
+    // We need to find non-internal MAC address
+    if (!nI[key][0].internal) {
+      macA = nI[key][0].mac;
+      break;
+    }
+  }
+
+  socket.emit('clientAuth', 'jklg;fdsajfgaisd');
+
+  const perfDataInterval = setInterval(() => {
+    performanceData().then((data) => {
+      socket.emit('perfData', data);
+    });
+  }, 1000);
+});
 
 const performanceData = async () => {
   // OS
@@ -70,5 +95,3 @@ const getCpuLoad = () => {
     }, 100);
   });
 };
-
-performanceData().then((data) => console.log(data));
