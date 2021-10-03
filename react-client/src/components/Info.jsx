@@ -1,5 +1,3 @@
-import moment from 'moment';
-
 export const Info = ({
   osType,
   upTime,
@@ -13,7 +11,7 @@ export const Info = ({
       <h3>Operating System</h3>
       <div className="widget-text">{osType}</div>
       <h3>Time Online</h3>
-      <div className="widget-text">{moment.duration(upTime).humanize()}</div>
+      <div className="widget-text">{upTime}</div>
       <h3>Processor information</h3>
       <div className="widget-text">
         <strong>Type:</strong> {cpuModel}

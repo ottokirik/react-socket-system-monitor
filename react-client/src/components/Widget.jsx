@@ -13,6 +13,7 @@ export const Widget = ({
     cpuSpeed,
     cpuLoad,
     macA,
+    isActive,
   },
 }) => {
   const cpu = { cpuLoad };
@@ -21,6 +22,7 @@ export const Widget = ({
 
   return (
     <div className="widget">
+      {!isActive && <div className="not-active">Offline</div>}
       <Cpu {...cpu} />
       <Mem {...mem} />
       <Info {...info} />
