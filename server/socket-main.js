@@ -5,12 +5,10 @@ mongoose.connect('mongodb://127.0.0.1:27017/perfData');
 const Machine = require('./models/Machine');
 
 const socketMain = (io, socket) => {
-  let macA;
-
   socket.on('clientAuth', (token) => {
-    if (token === 'fdsajfgaisd') {
+    if (token === 'TqhhIICJCKesUUdOYNnOyb9LoQtnb+B9d/') {
       socket.join('clients');
-    } else if (token === 'hlkjjlkhulhj;') {
+    } else if (token === 'tdeuVhMa7+hj983d2cOdFo6s2bbIegNqh6v67M') {
       // valid ui token has joined
       socket.join('ui');
     } else {
@@ -20,14 +18,12 @@ const socketMain = (io, socket) => {
   });
 
   socket.on('initPerfData', async (data) => {
-    macA = data.macA;
     const mongooseResponse = await checkAndAdd(data);
-
-    console.log(mongooseResponse);
   });
 
   socket.on('perfData', (data) => {
-    console.log(data);
+    console.log('Tick...');
+    io.to('ui').emit('data', data);
   });
 };
 

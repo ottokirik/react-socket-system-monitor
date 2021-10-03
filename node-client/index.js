@@ -21,10 +21,11 @@ socket.on('connect', () => {
     socket.emit('initPerfData', data);
   });
 
-  socket.emit('clientAuth', 'fdsajfgaisd');
+  socket.emit('clientAuth', 'TqhhIICJCKesUUdOYNnOyb9LoQtnb+B9d/');
 
   const perfDataInterval = setInterval(() => {
     performanceData().then((data) => {
+      data.macA = macA;
       socket.emit('perfData', data);
     });
   }, 1000);
