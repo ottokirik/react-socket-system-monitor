@@ -56,6 +56,8 @@ const performanceData = async () => {
 
   const cpuLoad = await getCpuLoad();
 
+  const isActive = true;
+
   return {
     freeMem,
     totalMem,
@@ -67,6 +69,7 @@ const performanceData = async () => {
     cpusNumOfCores,
     cpuSpeed,
     cpuLoad,
+    isActive,
   };
 };
 
